@@ -1,0 +1,16 @@
+{
+  "name": "freecad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "render.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "cirru-html": "^0.2.2",
+    "coffeescript": "^2.5.1",
+    "gaze": "^1.1.3"
+  }
+}
