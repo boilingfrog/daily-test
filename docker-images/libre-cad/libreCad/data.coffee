@@ -8,3 +8,9 @@ module.exports =
   aggregation:
     title: '聚合制造企业所需的任何数据'
     description: '无论是大数据、SQL 数据库、电子表格，还是MES、ERP、PLC等，全都支持。无需手动输入，通过传感器、API接口等方式获取数据。'
+
+  downloadApp: "下载应用"
+
+  varTitle: '__INSERT_TITLE__'
+  # varTitle: 'SIMATIC_PLCSIM'
+  varLink: '__INSERT_DOWNLOAD__'

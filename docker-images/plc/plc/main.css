@@ -1,5 +1,3 @@
-
-
 body {
   margin: 0;
   position: absolute;
@@ -8,7 +6,9 @@ body {
   flex-direction: column;
 
   font-size: 14px;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC,
+    Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-variant: tabular-nums;
   line-height: 1.5;
   -webkit-font-feature-settings: "tnum";
@@ -16,6 +16,7 @@ body {
 }
 
 body * {
+  box-sizing: border-box;
   /*box-shadow: 0 0 1px #ccc;*/
 }
 
@@ -29,23 +30,80 @@ body * {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
+}
+
+.title-container {
+  position: relative;
+  height: 80px;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 50px;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .banner-title {
-  width:433px;
-  height:70px;
-  font-size:50px;
-  font-weight:600;
-  color:rgba(96,98,102,1);
-  line-height:70px;
-  letter-spacing:1px;
-  background:linear-gradient(360deg, rgba(76,34,174,1) 0%, rgba(92,198,255,1) 52%, rgba(255,255,255,1) 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color: hsla(200, 100%, 68%, 1);
+  background: linear-gradient(
+    360deg,
+    rgba(76, 34, 174, 1) 0%,
+    rgba(92, 198, 255, 1) 52%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  z-index: 2;
+  user-select: none;
+}
+
+.shadow-title {
+  position: absolute;
+  width: 100%;
+  bottom: 8px;
+  left: 0;
+  z-index: 1;
+  color: rgba(96, 98, 102, 1);
+  background: linear-gradient(
+    360deg,
+    rgba(76, 34, 174, 1) 0%,
+    rgba(92, 198, 255, 1) 52%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  opacity: 0.23;
+  user-select: none;
+}
+
+.placeholder-title {
+  opacity: 0;
+}
+
+.fake-slim-line {
+  width: 340px;
+  height: 1px;
+  background: rgba(100, 88, 192, 1);
+  opacity: 0.66;
+  margin: auto;
+  margin-bottom: 9px;
+}
+
+.fake-underline {
+  width: 380px;
+  height: 9px;
+  background: rgba(100, 88, 192, 1);
+  opacity: 0.66;
+  margin: auto;
 }
 
 .pad-area {
-  width: 200px;
+  width: 160px;
+  margin: 0 80px;
 }
 
 .download-link {
@@ -54,11 +112,11 @@ body * {
 }
 
 .download-button {
-  width:154px;
-  height:47px;
-  background:rgba(75,206,45,1);
-  border-radius:4px;
-  border:0px solid rgba(91,58,98,1);
+  width: 154px;
+  height: 47px;
+  background: rgba(75, 206, 45, 1);
+  border-radius: 4px;
+  border: 0px solid rgba(91, 58, 98, 1);
   color: white;
   font-size: 22px;
   cursor: pointer;
@@ -70,12 +128,13 @@ body * {
 }
 
 .download-icon {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background-image: url(assets/download-icon-2x.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  margin-right: 2px;
 }
 
 .page-body {
@@ -102,7 +161,7 @@ body * {
   max-width: 80%;
   font-size: 27px;
   font-weight: 600;
-  color: rgba(96,98,102,1);
+  color: rgba(96, 98, 102, 1);
   line-height: 32px;
 
   margin-bottom: 40px;
@@ -110,10 +169,13 @@ body * {
 
 .sub-title {
   margin-bottom: 20px;
+  color: hsla(220, 3%, 39%, 1);
 }
 
 .description {
   line-height: 40px;
+  font-size: 12px;
+  color: hsla(220, 3%, 39%, 1);
 }
 
 .content-space {
@@ -121,12 +183,9 @@ body * {
 }
 
 .text-content {
+  padding: 80px 0;
   width: 500px;
   max-width: 100%;
-}
-
-.v-space {
-  height: 120px;
 }
 
 @media only screen and (max-width: 600px) {

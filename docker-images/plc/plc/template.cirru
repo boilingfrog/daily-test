@@ -17,19 +17,21 @@ html
     div.page-head
       div.pad-area
       div
-        div.banner-title
-          = __INSERT_TITLE__
-        div
+        div.title-container
+          div.shadow-title $ @ varTitle
+          div.banner-title  $ @ varTitle
+          div.placeholder-title $ @ varTitle
+        div.fake-slim-line
+        div.fake-underline
       div.pad-area
         a.download-link
-          :href __INSERT_DOWNLOAD__
+          :href $ @ varLink
           :target _blank
           button.download-button
             div.download-icon
             span
-              = "下载应用"
+              @ downloadApp
     div.page-body
-      div.v-space
       @with (@ platform)
         div.content-section
           div.demo-image
@@ -41,7 +43,7 @@ html
               @ subTitle
             div.description
               @ description
-      div.v-space
+
       @with (@ aggregation)
         div.content-section
           div.text-content
@@ -51,4 +53,3 @@ html
               @ description
           div.content-space
           div.demo-image
-      div.v-space

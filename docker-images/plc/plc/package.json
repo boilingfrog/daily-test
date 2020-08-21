@@ -1,16 +1,22 @@
 {
-  "name": "freecad",
+  "name": "page-dl-freecad",
   "version": "1.0.0",
   "description": "",
   "main": "render.js",
   "scripts": {
+    "css": "prettier main.css --write",
+    "render": "yarn coffee render.coffee",
+    "serve": "yarn hs .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "private": true,
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "cirru-html": "^0.2.2",
     "coffeescript": "^2.5.1",
-    "gaze": "^1.1.3"
+    "gaze": "^1.1.3",
+    "http-server": "^0.12.3",
+    "prettier": "^2.0.5"
   }
 }
