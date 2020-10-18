@@ -22,7 +22,7 @@ func (p *HelloServiceImpl) Hello(
 
 func main() {
 
-	creds, err := credentials.NewServerTLSFromFile("/Users/yj/goWork/daily-test/gRPC_advanced/server.crt", "/Users/yj/goWork/daily-test/gRPC_advanced/server.key")
+	creds, err := credentials.NewServerTLSFromFile("/Users/yj/goWork/daily-test/gRPC_advanced/cert/server.crt", "/Users/yj/goWork/daily-test/gRPC_advanced/cert/server.key")
 	if err != nil {
 		log.Fatal(err)
 	}

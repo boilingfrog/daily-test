@@ -13,7 +13,7 @@ import (
 
 func main() {
 	creds, err := credentials.NewClientTLSFromFile(
-		"/Users/yj/goWork/daily-test/gRPC_advanced/server.crt", "main.HelloService",
+		"/Users/yj/goWork/daily-test/gRPC_advanced/cert/server.crt", "localhost",
 	)
 	if err != nil {
 		log.Fatal(err)
