@@ -25,13 +25,8 @@ type grpcServer struct {
 func (p *grpcServer) Hello(
 	ctx context.Context, args *gRPC_token.String,
 ) (*gRPC_token.String, error) {
-
-	// 初始化信息
-	p.auth = &Authentication{
-		User:     "liz",
-		Password: "123456",
-	}
-
+	// 初始化信息，测试用的
+	p.Init()
 	// 检验
 	if err := p.auth.Auth(ctx); err != nil {
 		return nil, err
@@ -39,6 +34,14 @@ func (p *grpcServer) Hello(
 
 	reply := &gRPC_token.String{Value: "hello:" + args.GetValue()}
 	return reply, nil
+}
+
+// 测试使用
+func (p *grpcServer) Init() {
+	p.auth = &Authentication{
+		User:     "liz",
+		Password: "123456",
+	}
 }
 
 // 认证
