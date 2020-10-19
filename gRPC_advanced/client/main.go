@@ -34,5 +34,4 @@ func main() {
 	}
 	fmt.Println(reply.GetValue())
 
-	fmt.Println(grpc.ServiceInfo{})
 }
