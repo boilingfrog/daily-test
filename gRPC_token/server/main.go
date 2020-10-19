@@ -25,6 +25,13 @@ type grpcServer struct {
 func (p *grpcServer) Hello(
 	ctx context.Context, args *gRPC_token.String,
 ) (*gRPC_token.String, error) {
+
+	// 初始化信息
+	p.auth = &Authentication{
+		User:     "liz",
+		Password: "123456",
+	}
+
 	// 检验
 	if err := p.auth.Auth(ctx); err != nil {
 		return nil, err
@@ -34,13 +41,7 @@ func (p *grpcServer) Hello(
 	return reply, nil
 }
 
-func (a *Authentication) new() {
-	*a = *new(Authentication)
-	a.Password = "123456"
-	a.User = "liz"
-
-}
-
+// 认证
 func (a *Authentication) Auth(ctx context.Context) error {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
@@ -56,8 +57,6 @@ func (a *Authentication) Auth(ctx context.Context) error {
 	if val, ok := md["password"]; ok {
 		appkey = val[0]
 	}
-
-	fmt.Println(appkey)
 
 	if appid != a.User || appkey != a.Password {
 		return grpc.Errorf(codes.Unauthenticated, "invalid token")
