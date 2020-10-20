@@ -18,9 +18,17 @@ func (p *HelloServiceImpl) Hello(
 	return reply, nil
 }
 
+func filter(ctx context.Context,
+	req interface{}, info *grpc.UnaryServerInfo,
+	handler grpc.UnaryHandler,
+) (resp interface{}, err error) {
+	log.Println("filter:", info)
+	return handler(ctx, req)
+}
+
 func main() {
 
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(grpc.UnaryInterceptor(filter))
 	gRPC_filter.RegisterHelloServiceServer(grpcServer, new(HelloServiceImpl))
 
 	lis, err := net.Listen("tcp", ":1234")

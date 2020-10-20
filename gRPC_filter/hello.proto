@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package main;
+package gRPC_filter;
 
 message String {
     string value = 1;
