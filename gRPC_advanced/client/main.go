@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	// 带入证书的信息
 	creds, err := credentials.NewClientTLSFromFile(
 		"/Users/yj/goWork/daily-test/gRPC_advanced/cert/server.crt", "localhost",
 	)
@@ -33,5 +34,4 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(reply.GetValue())
-
 }

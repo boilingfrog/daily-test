@@ -1,0 +1,19 @@
+syntax = "proto2";
+package validator;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+    optional FieldValidator field = 65020;
+}
+
+message FieldValidator {
+    // Uses a Golang RE2-syntax regex to match the field contents.
+    optional string regex = 1;
+    // Field value of integer strictly greater than this value.
+    optional int64 int_gt = 2;
+    // Field value of integer strictly smaller than this value.
+    optional int64 int_lt = 3;
+
+    // ... more ...
+}
