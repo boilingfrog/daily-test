@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package gRPC_advanced;
+package gRPC_cert;
 
 message String {
     string value = 1;

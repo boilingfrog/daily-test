@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"daily-test/gRPC_advanced"
+	"daily-test/gRPC_cert"
 	"fmt"
 	"log"
 
@@ -14,7 +14,7 @@ import (
 func main() {
 	// 带入证书的信息
 	creds, err := credentials.NewClientTLSFromFile(
-		"/Users/yj/goWork/daily-test/gRPC_advanced/cert/server.crt", "localhost",
+		"/Users/yj/goWork/daily-test/gRPC_cert/cert/server.crt", "localhost",
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -28,8 +28,8 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := gRPC_advanced.NewHelloServiceClient(conn)
-	reply, err := client.Hello(context.Background(), &gRPC_advanced.String{Value: "hello"})
+	client := gRPC_cert.NewHelloServiceClient(conn)
+	reply, err := client.Hello(context.Background(), &gRPC_cert.String{Value: "hello"})
 	if err != nil {
 		log.Fatal(err)
 	}
