@@ -25,17 +25,6 @@ func (p *HelloServiceImpl) Hello(
 
 func main() {
 
-	//creds, err := credentials.NewServerTLSFromFile("/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/server.crt", "/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/server.key")
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//
-	//cert, err := tls.LoadX509KeyPair("../../conf/server/server.pem", "../../conf/server/server.key")
-	//if err != nil {
-	//	log.Fatalf("tls.LoadX509KeyPair err: %v", err)
-	//}
-	//
-
 	cert, err := tls.LoadX509KeyPair("/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/server/server.pem", "/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/server/server.key")
 	if err != nil {
 		log.Fatalf("tls.LoadX509KeyPair err: %v", err)
