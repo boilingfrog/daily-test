@@ -32,7 +32,7 @@ func main() {
 
 	c := credentials.NewTLS(&tls.Config{
 		Certificates: []tls.Certificate{cert},
-		ServerName:   "gRPC_cert_ca",
+		ServerName:   "localhost",
 		RootCAs:      certPool,
 	})
 
@@ -44,13 +44,9 @@ func main() {
 	}
 	defer conn.Close()
 
-	fmt.Println("+++++++++++++++")
-
 	client := gRPC_cert_ca.NewHelloServiceClient(conn)
 	reply, err := client.Hello(context.Background(), &gRPC_cert_ca.String{Value: "hello"})
-	fmt.Println(reply)
 	if err != nil {
-		fmt.Println("-----------")
 		log.Fatal(err)
 	}
 	fmt.Println(reply.GetValue())
