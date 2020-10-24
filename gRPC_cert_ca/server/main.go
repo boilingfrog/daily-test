@@ -25,13 +25,13 @@ func (p *HelloServiceImpl) Hello(
 
 func main() {
 
-	cert, err := tls.LoadX509KeyPair("/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/server/server.pem", "/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/server/server.key")
+	cert, err := tls.LoadX509KeyPair("./gRPC_cert_ca/cert/server/server.pem", "./gRPC_cert_ca/cert/server/server.key")
 	if err != nil {
 		log.Fatalf("tls.LoadX509KeyPair err: %v", err)
 	}
 
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile("/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/ca.pem")
+	ca, err := ioutil.ReadFile("./gRPC_cert_ca/cert/ca.pem")
 	if err != nil {
 		log.Fatalf("ioutil.ReadFile err: %v", err)
 	}

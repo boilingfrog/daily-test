@@ -15,13 +15,13 @@ import (
 )
 
 func main() {
-	cert, err := tls.LoadX509KeyPair("/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/client/client.pem", "/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/client/client.key")
+	cert, err := tls.LoadX509KeyPair("./gRPC_cert_ca/cert/client/client.pem", "./gRPC_cert_ca/cert/client/client.key")
 	if err != nil {
 		log.Fatalf("tls.LoadX509KeyPair err: %v", err)
 	}
 
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile("/Users/yj/goWork/daily-test/gRPC_cert_ca/cert/ca.pem")
+	ca, err := ioutil.ReadFile("./gRPC_cert_ca/cert/ca.pem")
 	if err != nil {
 		log.Fatalf("ioutil.ReadFile err: %v", err)
 	}
@@ -50,4 +50,5 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(reply.GetValue())
+
 }
