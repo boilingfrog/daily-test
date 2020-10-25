@@ -5,7 +5,6 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"daily-test/gRPC/gRPC_web"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -54,10 +53,10 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprintln(w, "hello")
+		w.Write([]byte("hello"))
 	})
 
-	http.ListenAndServeTLS(":1234", "server.crt", "server.key",
+	http.ListenAndServeTLS(":1234", "./gRPC/gRPC_web/cert/server/server.pem", "./gRPC/gRPC_web/cert/server/server.key",
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			if r.ProtoMajor != 2 {
 				mux.ServeHTTP(w, r)
@@ -74,5 +73,4 @@ func main() {
 			return
 		}),
 	)
-	fmt.Println("+++++++++++++")
 }
