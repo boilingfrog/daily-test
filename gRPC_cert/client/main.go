@@ -14,7 +14,7 @@ import (
 func main() {
 	// 带入证书的信息
 	creds, err := credentials.NewClientTLSFromFile(
-		"/Users/yj/goWork/daily-test/gRPC_cert/cert/server.crt", "localhost",
+		"./gRPC_cert/cert/server.crt", "localhost",
 	)
 	if err != nil {
 		log.Fatal(err)

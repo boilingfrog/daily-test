@@ -1,4 +1,4 @@
-package gRPC_token
+package main
 
 import context "context"
 

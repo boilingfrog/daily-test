@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	auth := gRPC_token.Authentication{
+	auth := Authentication{
 		User:     "liz",
 		Password: "123456",
 	}
