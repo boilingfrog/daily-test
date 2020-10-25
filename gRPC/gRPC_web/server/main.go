@@ -2,9 +2,16 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"daily-test/gRPC/gRPC_web"
+	"fmt"
+	"io/ioutil"
 	"log"
-	"net"
+	"net/http"
+	"strings"
+
+	"google.golang.org/grpc/credentials"
 
 	"google.golang.org/grpc"
 )
@@ -20,12 +27,52 @@ func (p *HelloServiceImpl) Hello(
 
 func main() {
 
-	grpcServer := grpc.NewServer()
+	cert, err := tls.LoadX509KeyPair("./gRPC/gRPC_web/cert/server/server.pem", "./gRPC/gRPC_web/cert/server/server.key")
+	if err != nil {
+		log.Fatalf("tls.LoadX509KeyPair err: %v", err)
+	}
+
+	certPool := x509.NewCertPool()
+	ca, err := ioutil.ReadFile("./gRPC/gRPC_web/cert/ca.pem")
+	if err != nil {
+		log.Fatalf("ioutil.ReadFile err: %v", err)
+	}
+
+	if ok := certPool.AppendCertsFromPEM(ca); !ok {
+		log.Fatalf("certPool.AppendCertsFromPEM err")
+	}
+
+	c := credentials.NewTLS(&tls.Config{
+		Certificates: []tls.Certificate{cert},
+		ClientAuth:   tls.RequireAndVerifyClientCert,
+		ClientCAs:    certPool,
+	})
+
+	grpcServer := grpc.NewServer(grpc.Creds(c))
+
 	gRPC_web.RegisterHelloServiceServer(grpcServer, new(HelloServiceImpl))
 
-	lis, err := net.Listen("tcp", ":1234")
-	if err != nil {
-		log.Fatal(err)
-	}
-	grpcServer.Serve(lis)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		fmt.Fprintln(w, "hello")
+	})
+
+	http.ListenAndServeTLS(":1234", "server.crt", "server.key",
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.ProtoMajor != 2 {
+				mux.ServeHTTP(w, r)
+				return
+			}
+			if strings.Contains(
+				r.Header.Get("Content-Type"), "application/grpc",
+			) {
+				grpcServer.ServeHTTP(w, r)
+				return
+			}
+
+			mux.ServeHTTP(w, r)
+			return
+		}),
+	)
+	fmt.Println("+++++++++++++")
 }
