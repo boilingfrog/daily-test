@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package main;
+package gRPC_restful;
 
 import "google/api/annotations.proto";
 
@@ -9,14 +9,14 @@ message StringMessage {
 }
 
 service RestService {
-    rpc Get(StringMessage) returns (StringMessage) {
+    rpc GetMes(StringMessage) returns (StringMessage) {
         option (google.api.http) = {
-            get: "/get/{value}"
+            get: "/mes/{value}"
         };
     }
-    rpc Post(StringMessage) returns (StringMessage) {
+    rpc PostMes(StringMessage) returns (StringMessage) {
         option (google.api.http) = {
-            post: "/post"
+            post: "/mes"
             body: "*"
         };
     }
