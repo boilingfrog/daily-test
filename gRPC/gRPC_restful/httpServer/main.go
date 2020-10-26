@@ -10,18 +10,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-type HelloServiceImpl struct{}
-
-func (p *HelloServiceImpl) GetMes(ctx context.Context, args *gRPC_restful.StringMessage) (*gRPC_restful.StringMessage, error) {
-	reply := &gRPC_restful.StringMessage{Value: args.Value}
-	return reply, nil
-}
-
-func (p *HelloServiceImpl) PostMes(ctx context.Context, args *gRPC_restful.StringMessage) (*gRPC_restful.StringMessage, error) {
-	reply := &gRPC_restful.StringMessage{Value: args.Value + "post"}
-	return reply, nil
-}
-
 func main() {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
@@ -38,5 +26,4 @@ func main() {
 	}
 
 	http.ListenAndServe(":8080", mux)
-
 }
