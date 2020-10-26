@@ -1,19 +1,14 @@
-syntax = "proto2";
-package gRPC_validdator;
+syntax = "proto3";
 
-import "google/protobuf/descriptor.proto";
+package main;
 
-extend google.protobuf.FieldOptions {
-    optional FieldValidator field = 65020;
-}
+import "github.com/mwitkow/go-proto-validators/validator.proto";
 
-message FieldValidator {
-    // Uses a Golang RE2-syntax regex to match the field contents.
-    optional string regex = 1;
-    // Field value of integer strictly greater than this value.
-    optional int64 int_gt = 2;
-    // Field value of integer strictly smaller than this value.
-    optional int64 int_lt = 3;
-
-    // ... more ...
+message Message {
+    string important_string = 1 [
+        (validator.field) = {regex: "^[a-z]{2,5}$"}
+    ];
+    int32 age = 2 [
+        (validator.field) = {int_gt: 0, int_lt: 100}
+    ];
 }
