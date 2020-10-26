@@ -1,14 +1,23 @@
 syntax = "proto3";
 
-package main;
+package gRPC_validator;
 
 import "github.com/mwitkow/go-proto-validators/validator.proto";
 
-message Message {
-    string important_string = 1 [
-        (validator.field) = {regex: "^[a-z]{2,5}$"}
+
+service HelloService {
+    rpc Hello (RequestInfo) returns (String);
+}
+
+message RequestInfo {
+    string name = 1 [
+        (validator.field) = {regex: "^[a-zA-Z0-9_-]{4,16}$"}
     ];
-    int32 age = 2 [
+    int64 age = 2 [
         (validator.field) = {int_gt: 0, int_lt: 100}
     ];
+}
+
+message String {
+    string value = 1;
 }

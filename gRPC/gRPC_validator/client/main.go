@@ -17,7 +17,11 @@ func main() {
 	defer conn.Close()
 
 	client := gRPC_validator.NewHelloServiceClient(conn)
-	reply, err := client.Hello(context.Background(), &gRPC_validator.String{Value: "hello"})
+	reply, err := client.Hello(context.Background(), &gRPC_validator.RequestInfo{
+		Name: "hello",
+		Age:  20,
+	},
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
