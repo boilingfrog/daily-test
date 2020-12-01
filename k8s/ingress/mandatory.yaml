@@ -211,7 +211,7 @@ spec:
       serviceAccountName: nginx-ingress-serviceaccount
       containers:
         - name: nginx-ingress-controller
-          image: lizhenliang/nginx-ingress-controller:0.20.0
+          image: liz2019/nginx-ingress-controller:0.20.0
           args:
             - /nginx-ingress-controller
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
