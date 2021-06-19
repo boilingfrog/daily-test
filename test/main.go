@@ -1,6 +1,9 @@
 package main
 
-import "golang.org/x/sync/errgroup"
+import (
+	"errors"
+	"fmt"
+)
 
 type RecentlyHandleQuestionnaireBookOutput struct {
 	RecommendBooks []string `json:"recommendBooks,omitempty"`
@@ -10,22 +13,25 @@ type RecentlyHandleQuestionnaireBookOutput struct {
 }
 
 func main() {
-	var output = &RecentlyHandleQuestionnaireBookOutput{}
+	str, err := test1()
+	defer errPrint(err)
+	_ = str
 
-	var eg errgroup.Group
-
-	eg.Go(func() error {
-		output.IsFirst = true
-		return nil
-	})
-
-	eg.Go(func() error {
-		output.LikePercent = 32
-		return nil
-	})
-
-	if err := eg.Wait(); err != nil {
-		return
+	str2, err := test2()
+	if err != nil {
+		_ = err
 	}
+	_ = str2
+}
 
+func errPrint(err2 error) {
+	fmt.Println(err2)
+}
+
+func test1() (string, error) {
+	return "1", errors.New("err 1")
+}
+
+func test2() (string, error) {
+	return "2", errors.New("err 2")
 }
