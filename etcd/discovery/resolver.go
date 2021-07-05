@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/coreos/etcd/mvcc/mvccpb"
+	"go.etcd.io/etcd/clientv3"
 	"go.uber.org/zap"
 
-	"go.etcd.io/etcd/clientv3"
 	"google.golang.org/grpc/resolver"
 )
 
