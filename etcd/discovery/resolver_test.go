@@ -23,8 +23,12 @@ func TestResolver(t *testing.T) {
 	r := NewResolver(etcdAddrs, zap.NewNop())
 	resolver.Register(r)
 
-	go newServer(t, ":8081", "1.0.0", 1)
-	go newServer(t, ":8082", "1.0.0", 10)
+	// etcd中注册5个服务
+	go newServer(t, ":1001", "1.0.0", 1)
+	go newServer(t, ":1002", "1.0.0", 1)
+	go newServer(t, ":1003", "1.0.0", 1)
+	go newServer(t, ":1004", "1.0.0", 1)
+	go newServer(t, ":1006", "1.0.0", 10)
 
 	conn, err := grpc.Dial("etcd:///hello", grpc.WithInsecure(), grpc.WithBalancerName(roundrobin.Name))
 	if err != nil {
@@ -34,13 +38,7 @@ func TestResolver(t *testing.T) {
 
 	c := helloworld.NewGreeterClient(conn)
 
-	go func() {
-		time.Sleep(1 * time.Second)
-		go newServer(t, ":8083", "1.0.1", 4)
-		time.Sleep(1 * time.Second)
-		go newServer(t, ":8084", "1.0.0", 5)
-	}()
-
+	// 进行十次数据请求
 	for i := 0; i < 10; i++ {
 		resp, err := c.SayHello(context.Background(), &helloworld.HelloRequest{Name: "abc"})
 		if err != nil {
@@ -79,13 +77,6 @@ func newServer(t *testing.T, port string, version string, weight int64) {
 		Addr:    fmt.Sprintf("127.0.0.1%s", port),
 		Version: version,
 		Weight:  weight,
-	}
-	if port == ":8082" {
-		go func(r *Register) {
-			time.Sleep(10 * time.Second)
-			fmt.Println("stop 8082")
-			r.Stop()
-		}(register)
 	}
 
 	register.Register(info, 10)
